@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw8qqie3j1ru7"]
+
+[ext_resource type="PackedScene" uid="uid://p5s8toufei41" path="res://scenes/player.tscn" id="1_ph47g"]
+[ext_resource type="Texture2D" uid="uid://d0ce8qfppoosd" path="res://art/NewSandyBeach.png" id="2_e6yel"]
+[ext_resource type="AudioStream" uid="uid://duv5u14b56eao" path="res://sound/forGameArt.mp3" id="3_e6yel"]
+
+[node name="GameTest" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_ph47g")]
+
+[node name="BG" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_e6yel")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_e6yel")
+autoplay = true
