@@ -57,7 +57,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [node name="Boss" type="Node2D"]
@@ -68,6 +68,7 @@ y_sort_enabled = true
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_2avx2")
 autoplay = "default"
+frame_progress = 0.45811
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.388235)

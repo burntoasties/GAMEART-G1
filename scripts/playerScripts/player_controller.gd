@@ -6,14 +6,13 @@ const FOLLOWER_SCENE_PRELOAD = preload("res://scenes/follower.tscn")
 @export var accel: float = 25.0
 @export var friction: float = 25.0
 
-@onready var parent: Node2D = get_parent()
 @onready var anim_tree:AnimationTree = get_node("AnimationTree")
-@onready var footstep_player: AudioStreamPlayer2D
+@onready var player: AudioStreamPlayer2D = $SFX
 
 var atkState = false
 var sprinting = false
-var footstep_timer := 0.0
-var footstep_interval := 0.3
+var footstep_timer = 0.0
+var footstep_interval: float
 
 var followers: Array[Node2D] = []
 var distance_spacing: float = 20.0
@@ -22,10 +21,17 @@ var _trail_points: Array[Vector2] = []
 func _ready() -> void:
 	_spawn_follower()
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	footstep_timer -= delta
+	
 	if Input.is_action_just_pressed("attack"):
 		anim_tree.get("parameters/playback").travel("Attack")
 		atkState = true
+		
+		player.stream = preload("res://sound/SwordSwoosh.mp3")
+		player.pitch_scale = randf_range(0.9, 1.1)
+		
+		player.play()
 	
 	var input_vec = Input.get_vector("left", "right", "up", "down") # Defined in engine settings
 	
@@ -49,34 +55,21 @@ func _physics_process(_delta):
 			anim_tree.set("parameters/Run/BlendSpace2D/blend_position", input_vec)
 			anim_tree.set("parameters/Walk/BlendSpace2D/blend_position", input_vec)
 			anim_tree.set("parameters/Attack/BlendSpace2D/blend_position", input_vec)
+			
+			if footstep_timer <= 0.0:
+				if Input.is_action_pressed("sprint"):
+					footstep_interval = 0.3
+				else:
+					footstep_interval = 0.4
+				
+				footstep_timer = footstep_interval
+				player.stream = preload("res://sound/GrassStep.wav")
+				player.pitch_scale = randf_range(0.9, 1.1)
+				player.play()
 		
 		move_and_slide()
 		
 		_follower_logic()
-
-func get_terrain_value() -> int:
-	if parent:
-		var datamap = parent.datamap
-		
-		if datamap == null:
-			return 0
-		
-		var local = datamap.to_local(global_position)
-		var tile_pos = datamap.local_to_map(local)
-		
-		return datamap.get_cell_tile_data(0, tile_pos).get_custom_data("surface")
-	else:
-		return 0
-
-func get_terrain_type(value: int) -> String:
-	if value == 1:
-		return "grass"
-	if value == 2:
-		return "sand"
-	if value == 3:
-		return "stone"
-	else:
-		return "wood"
 
 func _follower_logic() -> void:
 	if _trail_points.is_empty() or _trail_points[0].distance_to(global_position) >= 1.0:

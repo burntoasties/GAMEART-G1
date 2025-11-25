@@ -1,7 +1,6 @@
-[gd_scene load_steps=164 format=3 uid="uid://p5s8toufei41"]
+[gd_scene load_steps=163 format=3 uid="uid://p5s8toufei41"]
 
 [ext_resource type="Script" uid="uid://8bcxw0h3l5gx" path="res://scripts/playerScripts/player_controller.gd" id="1_g2els"]
-[ext_resource type="Script" uid="uid://cf2mdj8nwj5e7" path="res://scripts/playerScripts/player.gd" id="1_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://bnegjo8rcunji" path="res://art/anitoSprites/anitoSheet.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://crippk882lyjs" path="res://art/anitoSprites/anitoAtkSheet.png" id="3_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://c5jws4p8bdwu4" path="res://art/anitoSprites/entityShadow.png" id="4_dqkch"]
@@ -1519,7 +1518,6 @@ graph_offset = Vector2(-29, -75.7561)
 
 [node name="Player" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_qlg0r")
 
 [node name="playerController" type="CharacterBody2D" parent="."]
 y_sort_enabled = true
@@ -1564,6 +1562,7 @@ parameters/Idle/BlendSpace2D/blend_position = Vector2(0.00154555, 0.0107143)
 parameters/Run/BlendSpace2D/blend_position = Vector2(-0.000735819, 0)
 parameters/Walk/BlendSpace2D/blend_position = Vector2(0.00154555, 0.00380945)
 
-[node name="FootstepSFX" type="AudioStreamPlayer2D" parent="playerController"]
+[node name="SFX" type="AudioStreamPlayer2D" parent="playerController"]
+volume_db = -5.0
 
 [connection signal="animation_finished" from="playerController/AnimationTree" to="playerController" method="_on_animation_tree_animation_finished"]
