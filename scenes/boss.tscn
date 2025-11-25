@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://ik4jha2w0q3n"]
+
+[ext_resource type="Texture2D" uid="uid://07ss117xjbrq" path="res://art/npcSprites/kayumangIdleSheet.png" id="1_dlmty"]
+[ext_resource type="Texture2D" uid="uid://bp8o4f4fmasy0" path="res://art/npcSprites/kayumangShadow.png" id="2_neq0i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_neq0i"]
+atlas = ExtResource("1_dlmty")
+region = Rect2(0, 0, 80, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jncid"]
+atlas = ExtResource("1_dlmty")
+region = Rect2(80, 0, 80, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnbj4"]
+atlas = ExtResource("1_dlmty")
+region = Rect2(160, 0, 80, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3bxh"]
+atlas = ExtResource("1_dlmty")
+region = Rect2(240, 0, 80, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqpjq"]
+atlas = ExtResource("1_dlmty")
+region = Rect2(320, 0, 80, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cdgk"]
+atlas = ExtResource("1_dlmty")
+region = Rect2(400, 0, 80, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsl3t"]
+atlas = ExtResource("1_dlmty")
+region = Rect2(480, 0, 80, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2avx2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_neq0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jncid")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnbj4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3bxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqpjq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cdgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsl3t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Boss" type="Node2D"]
+y_sort_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -20)
+sprite_frames = SubResource("SpriteFrames_2avx2")
+autoplay = "default"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.388235)
+z_index = -1
+position = Vector2(0, 7)
+scale = Vector2(1.08, 1.08)
+texture = ExtResource("2_neq0i")

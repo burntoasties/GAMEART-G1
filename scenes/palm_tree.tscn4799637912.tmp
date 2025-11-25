@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://8rjp7xw42j1y"]
+
+[ext_resource type="Shader" uid="uid://balnygcd2c6wr" path="res://shaders/wind_sway.gdshader" id="1_40op7"]
+[ext_resource type="Texture2D" uid="uid://kj04tq27b5jo" path="res://art/props/palmTreeSprite.png" id="1_ksppw"]
+[ext_resource type="Script" uid="uid://dtg3ykc45yi7g" path="res://scripts/random_sway.gd" id="3_7thci"]
+[ext_resource type="Texture2D" uid="uid://ct6ltch327nln" path="res://art/props/palmTreeTops.png" id="4_4wcie"]
+[ext_resource type="Texture2D" uid="uid://c5jws4p8bdwu4" path="res://art/anitoSprites/entityShadow.png" id="5_40op7"]
+[ext_resource type="Script" uid="uid://u17ol6c0kgbn" path="res://scripts/shadow_sway.gd" id="5_gwltm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ksppw"]
+radius = 4.44127
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7thci"]
+shader = ExtResource("1_40op7")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.02
+shader_parameter/maxStrength = 0.05
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_40op7"]
+shader = ExtResource("1_40op7")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+
+[node name="PalmTree" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+z_index = 1
+position = Vector2(-2.275, 31.93)
+shape = SubResource("CircleShape2D_ksppw")
+
+[node name="ParentSprite" type="Sprite2D" parent="StaticBody2D"]
+material = SubResource("ShaderMaterial_7thci")
+texture = ExtResource("1_ksppw")
+script = ExtResource("3_7thci")
+
+[node name="EntityShadow" type="Sprite2D" parent="StaticBody2D/ParentSprite"]
+modulate = Color(1, 1, 1, 0.360784)
+z_index = -1
+position = Vector2(-2, 35)
+texture = ExtResource("5_40op7")
+
+[node name="PalmTreeTops" type="Sprite2D" parent="StaticBody2D/ParentSprite"]
+modulate = Color(1, 1, 1, 0.305882)
+z_index = -1
+material = SubResource("ShaderMaterial_40op7")
+position = Vector2(-5, 43)
+texture = ExtResource("4_4wcie")
+flip_v = true
+script = ExtResource("5_gwltm")
+
+[connection signal="ready" from="StaticBody2D/ParentSprite" to="StaticBody2D/ParentSprite" method="_on_ready"]

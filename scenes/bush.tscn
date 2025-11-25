@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdh01c7chtfpw"]
+
+[ext_resource type="Shader" uid="uid://balnygcd2c6wr" path="res://shaders/wind_sway.gdshader" id="1_ehqem"]
+[ext_resource type="Texture2D" uid="uid://bhql25t3ut8o3" path="res://art/props/bushSheet.png" id="1_lad4k"]
+[ext_resource type="Script" uid="uid://dnktid781gmp5" path="res://scripts/bush_script.gd" id="3_6ftm5"]
+[ext_resource type="Script" uid="uid://u17ol6c0kgbn" path="res://scripts/shadow_sway.gd" id="4_6ftm5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tu87o"]
+shader = ExtResource("1_ehqem")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.007
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 96.065
+shader_parameter/interval = 5.0
+shader_parameter/detail = 0.48
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ftm5"]
+radius = 4.0
+height = 22.0
+
+[node name="Bush" type="Node2D"]
+y_sort_enabled = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -5)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_tu87o")
+texture = ExtResource("1_lad4k")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+script = ExtResource("3_6ftm5")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/Sprite2D"]
+modulate = Color(0, 0, 0, 0.215686)
+z_index = -1
+y_sort_enabled = true
+position = Vector2(0, 3)
+scale = Vector2(1, 0.9375)
+texture = ExtResource("1_lad4k")
+flip_h = true
+flip_v = true
+hframes = 2
+script = ExtResource("4_6ftm5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+y_sort_enabled = true
+position = Vector2(0, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_6ftm5")

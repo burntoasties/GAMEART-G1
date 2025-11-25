@@ -11,17 +11,22 @@ config_version=5
 [application]
 
 config/name="GAMEART Group 1 - Anito's Reqiuem"
-run/main_scene="res://scenes/gameTest.tscn"
+run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://art/icon.svg"
+
+[autoload]
+
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [display]
 
 window/size/viewport_width=320
 window/size/viewport_height=180
 window/size/mode=2
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/vsync/vsync_mode=0
 
 [input]
 
@@ -59,3 +64,4 @@ attack={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_vertices_to_pixel=true
