@@ -13,7 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://codb5fobnx1pr" path="res://sound/OverworldMusic.mp3" id="11_kvpfn"]
 [ext_resource type="AudioStream" uid="uid://bsvv2k1l6yw8q" path="res://sound/Waves.mp3" id="13_kvuet"]
 [ext_resource type="PackedScene" uid="uid://ik4jha2w0q3n" path="res://scenes/boss.tscn" id="13_trtic"]
-[ext_resource type="Script" uid="uid://cp5eeuoqplggy" path="res://scripts/canvas_modulate.gd" id="14_trtic"]
+[ext_resource type="PackedScene" uid="uid://ccqb0kiaxo5mi" path="res://scenes/pause_menu.tscn" id="14_trtic"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u5sy4"]
 shader = ExtResource("4_p57ef")
@@ -193,6 +193,8 @@ tile_map_data = PackedByteArray("AAAJAAoAAAAAAAAAAAAJAAsAAAAAAAAAAAAJAAwAAAAAAAA
 tile_set = SubResource("TileSet_kvuet")
 
 [node name="BGM" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+position = Vector2(-4, 0)
 stream = ExtResource("11_kvpfn")
 volume_db = -5.0
 autoplay = true
@@ -223,4 +225,7 @@ parameters/looping = true
 visible = false
 position = Vector2(104, -187)
 color = Color(0.296263, 0.400625, 0.83762, 1)
-script = ExtResource("14_trtic")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("14_trtic")]

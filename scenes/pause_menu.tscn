@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccqb0kiaxo5mi"]
+
+[ext_resource type="Script" uid="uid://crkein1x2d8gb" path="res://pause_menu.gd" id="1_n87rw"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n87rw")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 38.0
+offset_right = 234.0
+offset_bottom = 139.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="ToggleMusicButton" type="CheckButton" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Music  "
+alignment = 2
+
+[node name="QuitButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="toggled" from="PanelContainer/VBoxContainer/ToggleMusicButton" to="." method="_on_toggle_music_button_toggled"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
